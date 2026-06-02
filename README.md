@@ -18,11 +18,11 @@ Realizar uma **Análise Exploratória de Dados (EDA)** inicial utilizando a **bi
 
 ### ✅ Atividades
 
-- [ ] Importe a biblioteca `polars`.
-- [ ] Carregue o arquivo **winemag-data_first150k.csv** em um DataFrame.
-- [ ] Imprima as **5 primeiras linhas** do DataFrame para vermos a "cara" dos dados.
-- [ ] Descubra e imprima a quantidade total de **linhas** e **colunas** do DataFrame.
-- [ ] Descubra quais são os **tipos de dados** de cada coluna.
+- [x] Importe a biblioteca `polars`.
+- [x] Carregue o arquivo **winemag-data_first150k.csv** em um DataFrame.
+- [x] Imprima as **5 primeiras linhas** do DataFrame para vermos a "cara" dos dados.
+- [x] Descubra e imprima a quantidade total de **linhas** e **colunas** do DataFrame.
+- [x] Descubra quais são os **tipos de dados** de cada coluna.
 
 ### 🎯 O que você deve responder
 - Quantas linhas existem?
