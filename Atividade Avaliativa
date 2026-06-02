@@ -1,0 +1,44 @@
+#ETAPA 1º
+
+import polars as pl #Importando a biblioteca Polars e renomeando ela de 'pl'.
+
+df = pl.read_csv("winemag-data_first150k.csv") #Carregando o DataSet de vinhos utilizando o pl.read_csv
+
+#DataFrame Resumido entre as 5 primeiras linhas e as 5 ultimas linhas.
+print(df.head()) #Mostrando as 5 primeiras linhas do DataSet
+print(df.tail()) #Mostrando as 5 ultimas linhas do DataSet
+
+#Verificação de Colunas e Linhas do DataSet
+linhas, colunas = df.shape #Atrelei os dois indice do df.shape como linhas (Número de linhas) e como colunas (Número de colunas).
+print(f"{linhas} de Linhas\n{colunas} de Colunas") #Printa a quantidade de linhas e colunas, 
+print(df.columns) #Mostra apenas o nome de todas as colunas.
+print(df.schema) #Mostra o nome de todas as colunas e tipo de dados 
+
+#Estatística Resumida de rápido e fácil acesso.
+print(df.describe()) #Mostra uma estatística resumida dos dados das colunas. 
+
+#O Dataset contém 150930 linhas e 11 colunas.
+#Colunas INT64: Country, Price
+#Colunas String: Description, Designation, Poins, Region_1, Region_2, Variety, Winery
+#Colunas Float64: Province
+
+#A etapa 1 é importante para que possamos compreender melhor o que o DataSet esta nos mostrando.
+#_________________________________________
+
+#ETAPA 02
+pl.Config.set_tbl_cols(-1)
+print(df.null_count()) #Através do null_count é possível verificarmos a quantidade de valores nulos em cada coluna. 
+print("Quantidade de Valores Nulos")
+print(df["price"].null_count()) #Verificando apenas a coluna price
+
+dfclear = df.filter(pl.col("price").is_not_null()) #Criando um novo dataframe mantendo todas as linhas mas removendo apenas as linhas que a coluna price tinha valores nulos. 
+linhasclear, colunasclear = dfclear.shape
+print(f"{linhasclear} de Linhas\n{colunasclear} de Colunas")
+
+#As Colunas que possuem valores números são. Country: 5, Designation: 5, Points: 13695, Province: 5, Region_1: 25060, Region_2: 89977
+#Restando apenas no novo DataSet 137235 linhas, após a retirada das linhas apenas da coluna Price. 
+
+
+#Etapa 3
+
+
