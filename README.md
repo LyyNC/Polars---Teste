@@ -37,9 +37,9 @@ Na vida real, os dados raramente vêm perfeitos. Precisamos saber onde estão os
 
 ### ✅ Atividades
 
-- [ ] Verifique quantas informações nulas (ausentes) existem em cada coluna.
-- [ ] A coluna `price` (preço) é muito importante para nós.
-- [ ] Crie um novo DataFrame que exclua todas as linhas onde o preço seja nulo.
+- [x] Verifique quantas informações nulas (ausentes) existem em cada coluna.
+- [x] A coluna `price` (preço) é muito importante para nós.
+- [x] Crie um novo DataFrame que exclua todas as linhas onde o preço seja nulo.
 
 ### 🎯 O que você deve responder
 - Quais colunas possuem valores nulos?
