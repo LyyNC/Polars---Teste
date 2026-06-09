@@ -1,17 +1,65 @@
-import polars as pl #Importando biblioteca Polars e apelidando ela de "pl"
+# - # - # - # - # - # - #
+#ETAPA 1º - Conhecendo o Terreno (Importação e Inspeção)
+# - # - # - # - # - # - #
 
-df = pl.read_csv("winemag-data_first150k.csv") #Utiliazndo o polars (pl.read_csv) para ler o arquivo 
+#Primeiro passo para um Cientista de Dados é identificar quais bibliotecas será necessária utilizar, instalando e importando as devidas bibliotecas
+import polars as pl 
 
-#df = pl.scan_csv("winemag-data_first150k.csv") #Diferente o Read_csv, o Scan_csv irá realizar um carregamento preguiçoso de dados, sendo uma grande vantagem para conjuntos de dados grandes, permitindo que o polars otimize as consultas antes de ler o conjunto de dados completo.
+#Carregando o DataSet de Vinhos utilizando o Polars, através do pl.read_csv
+df = pl.read_csv("winemag-data_first150k.csv")
 
-print(df.head()) #Exibe um DataFrame com as colunas e as 5 primeiras linhas do dataframe, podendo alterar a exibição de acordo com o desejavel, por exemplo: 
-#print(df.head(10)) -> Irá mostrar as 10 primeiras linhas. 
+#Exibindo as 5 primeiras e 5 ultimas linhas através de um DataFrame, podendo trazer uma noção inicial dos dados. 
+print(df.head()) #O comando head irá exibir as 5 primeiras linhas. 
+print(df.tail()) #O comando tail irá exibir as 5 ultimas linhas.
 
-print(df.tail()) #Exibe um DataFrame com as colunas e as 5 ultimas linhas do DataFrame
+#Um passo importante para o Cientista é identificar o tamanho do seu dados, seja em quantidade de linhas e ou de colunas.
+linhas, colunas = df.shape #Atrelando os dois indices do .shape como 'linhas', 'colunas'.
+print(f"{linhas} de Linhas\n{colunas} de Colunas") #Printa a quantidade de linhas e colunas, 
+print(df.columns) #Mostra apenas o nome de todas as colunas.
+print(df.schema) #Mostra o nome de todas as colunas e tipo de dados 
 
-pl.set_random_seed(42) #Serve para que possa setar uma Seed no código, mantendo a reprodutividade. 
+#Esstatística Resumida dos dados pode auxiliar o Cientista identificar padrões, erros e outros de forma rápida e de fácil acesso. 
+print(df.describe()) #Através do .describe, mostra a estatística resumida dos dados através de um DataFrame. Quantidade de Colunas, Valores Núlos, Média, Desvio Padrão, Quartis... 
 
-print(df.describe()) #Irá mostrar as estatísticas resumidas de todas as colunas do DataFrame
 
-print(df.schema()) #Um dos comandos mais importantes para EDA, pois irá mostrar os nomes das colunas ou séries para os tipos de dados, como String, Date, Float64 e outros... Algo muito necessário para o Pre-Processamento.
+#A etapa 1 é importante para que possamos compreender melhor o que o DataSet esta nos mostrando.
+#A Etapa 1 é importante para que possamos compreender melhor o DataSet e o que ele esta nos mostrando antes mesmo de sairmos digitando linhas de códigos.
+
+# - # - # - # - # - # - #
+#ETAPA 2º - A Arte da Limpeza (Lidando com Valores Nulos)
+# - # - # - # - # - # - #
+
+#Um dos problemas normalmente encontrado nos dados é os casos de valores nulos, é uma etapa que deve ser feita de forma correta, pois pode trazer resultados adversos. 
+pl.Config.set_tbl_cols(-1)#Configuração o polars para que possa mostrar todas as colunas. 
+print(df.null_count()) #Através do null_count é possível verificarmos a quantidade de valores nulos em cada coluna através de um DataFrame.
+print("Quantidade de Valores Nulos")
+print(df["price"].null_count()) #Verificando os valores nulos apenas a coluna 'price'
+
+dfclear = df.filter(pl.col("price").is_not_null()) #Criando um novo dataframe mantendo todas as linhas/colunas, mas removendo apenas as linhas que a coluna price tinha valores nulos.
+#Há diversas formas de lidarmos com valores nulos, sendo a remoção, atribuindo valores de média ou mediana, criando valores superficiais, tudo dependerá da necessidade e o tipo de dado. 
+linhasclear, colunasclear = dfclear.shape #Atrelando os dois indices do .shape como 'linhas', 'colunas'.
+print(f"{linhasclear} de Linhas no dfclear\n{colunasclear} Colunas no dfclear")
+
+# - # - # - # - # - # - #
+#ETAPA 3º - Respondendo a Perguntas com Filtros
+# - # - # - # - # - # - #
+
+paises = dfclear["country"].unique().to_list() #Identificando os nomes dos Paises que contém a coluna 'country'.
+print(paises)
+
+dfclear.filter(pl.col("country") == "Brazil") #Filtrando apenas o Brazil na coluna 'country'
+
+#Através do .filter, criei um novo dataframe chamado de 'wine_brasil', com os devidos filtros, sendo eles 'Country == Brazil', 'Points > 80', 'Price < 20). 
+wine_brasil = dfclear.filter(
+    (pl.col("country") == "Brazil") & 
+    (pl.col("points") >= 80) &
+    (pl.col("price") < 20))
+
+print(wine_brasil.head())
+print(wine_brasil.height) #Exibindo quantidade de linhas existente agora no novo dataframe 'wine_brasil'. 
+
+
+# - # - # - # - # - # - #
+#ETAPA 4º - Agrupamento e Insight
+# - # - # - # - # - # - #
 
