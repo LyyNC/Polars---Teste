@@ -54,10 +54,10 @@ O time de negócios quer saber sobre vinhos específicos.
 
 ### ✅ Atividades
 
-- [ ] Filtre o DataFrame para mostrar apenas os vinhos do país (`country`) **"Brazil"**.
-- [ ] Filtre os vinhos que:
-  - [ ] Possuem pontuação (`points`) maior ou igual a **90**;
-  - [ ] Possuem preço (`price`) menor que **20 dólares**.
+- [x] Filtre o DataFrame para mostrar apenas os vinhos do país (`country`) **"Brazil"**.
+- [x] Filtre os vinhos que:
+  - [x] Possuem pontuação (`points`) maior ou igual a **90**;
+  - [x] Possuem preço (`price`) menor que **20 dólares**.
 
 ### 🎯 O que você deve responder
 - Quantos vinhos brasileiros existem na base?
