@@ -26,8 +26,11 @@ Realizar uma **Análise Exploratória de Dados (EDA)** inicial utilizando a **bi
 
 ### 🎯 O que você deve responder
 - Quantas linhas existem?
+R: 150930 Linhas
 - Quantas colunas existem?
+R: 11 Colunas
 - Quais são os tipos de dados presentes?
+R: Strings, Int64, Float64. 
 
 ---
 
@@ -42,10 +45,12 @@ Na vida real, os dados raramente vêm perfeitos. Precisamos saber onde estão os
 - [x] Crie um novo DataFrame que exclua todas as linhas onde o preço seja nulo.
 
 ### 🎯 O que você deve responder
-- Quais colunas possuem valores nulos?
+- Quais colunas possuem valores nulos? 
+R: 6 colunas possuem valores nulos
 - Quantos valores nulos existem em cada uma?
+R: Country = 5, Designation = 45735, Price = 13695, Province = 5, Region_1 = 25060, Region_2 = 89977
 - Quantas linhas restaram após remover os preços nulos?
-
+R: 137235 Linhas. 
 ---
 
 # 🔎 Etapa 3: Respondendo a Perguntas com Filtros
@@ -61,8 +66,9 @@ O time de negócios quer saber sobre vinhos específicos.
 
 ### 🎯 O que você deve responder
 - Quantos vinhos brasileiros existem na base?
+R: 25 vinhos brasileiros
 - Quantos vinhos atendem aos critérios de alta qualidade e baixo custo?
-
+R: 15 vinhos atendem os critérios de alta qualidade e baixo custo (OBS: Foi necessário diminuir para >= 80 points)
 ---
 
 # 📊 Etapa 4: Agrupamento e Insights (O poder do groupby)
@@ -73,17 +79,19 @@ Vamos encontrar os padrões gerais dos nossos dados.
 
 #### 1️⃣ Países e preço médio
 
-- [ ] Agrupe os dados por país (`country`).
-- [ ] Calcule a média de preço (`price`) dos vinhos de cada país.
-- [ ] Ordene o resultado do maior para o menor preço médio.
+- [x] Agrupe os dados por país (`country`).
+- [x] Calcule a média de preço (`price`) dos vinhos de cada país.
+- [x] Ordene o resultado do maior para o menor preço médio.
 
 #### 2️⃣ Melhor Chardonnay da base
 
-- [ ] Descubra qual é a pontuação máxima (`points`) recebida pelos vinhos da variedade (`variety`) **"Chardonnay"**.
+- [x] Descubra qual é a pontuação máxima (`points`) recebida pelos vinhos da variedade (`variety`) **"Chardonnay"**.
 
 ### 🎯 O que você deve responder
 - Qual país possui o maior preço médio?
+R: US-France
 - Qual foi a maior pontuação obtida por um Chardonnay?
+R: Malbec
 
 ---
 
@@ -93,8 +101,8 @@ Um bom cientista de dados cria suas próprias métricas.
 
 ### ✅ Atividades
 
-- [ ] Crie uma nova coluna chamada `custo_beneficio`.
-- [ ] Essa coluna deve ser calculada pela divisão:
+- [x] Crie uma nova coluna chamada `custo_beneficio`.
+- [x] Essa coluna deve ser calculada pela divisão:
 
 ```text
 points / price

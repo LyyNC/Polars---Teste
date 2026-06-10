@@ -58,8 +58,36 @@ wine_brasil = dfclear.filter(
 print(wine_brasil.head())
 print(wine_brasil.height) #Exibindo quantidade de linhas existente agora no novo dataframe 'wine_brasil'. 
 
+#Filtrando para identificar a quantidade de vinhos brasileiros existentes no DataSet
+qnt_wine_brasil = dfclear.filter(
+    (pl.col("country") == "Brazil")).height
+print(f"Quantidade de vinhos Brasileiro: {qnt_wine_brasil}")
 
 # - # - # - # - # - # - #
 #ETAPA 4º - Agrupamento e Insight
 # - # - # - # - # - # - #
 
+#Utilizando group_by para agrupar determinada coluna e realizar calculos, neste caso, o preço médio de vinho por paises. 
+wine_global = (
+    dfclear.group_by("country")
+    .agg(pl.col("price").mean())
+    .sort("price", descending=True))
+
+print(wine_global)
+
+wine_points = (
+    dfclear.group_by("variety")
+    .agg(pl.col("price").max()))
+
+print(wine_points)
+
+# - # - # - # - # - # - #
+#ETAPA 5º - Engenharia de Recursos
+# - # - # - # - # - # - #
+
+#Criando um novo DataFrame chamado de 'featuresdf', com uma nova coluna chamada de 'custo_beneficio' utilizando o .wiwh_colums e realizando a operação de divisão entre colunas
+featuresdf = dfclear.with_columns(
+    custo_beneficio = pl.col("points") / pl.col("price")
+)
+
+print(featuresdf)
